@@ -51,18 +51,45 @@ p{
 .buttons{
     margin: 0 auto;
 }
+
+button{
+    margin: 2px;
+}
+a{
+    text-decoration: none;
+color:black;
+}
     </style>
 </head>
 <body>
     <div class="container">
         <h1>{{ config('app.name') }}</h1>
+        <button>
+        <a href="/">Accueil</a>
+        </button>
+        <button>
+        <a href="/movie/random">Trouver un film au hasard</a>
+        </button>
+        <div><button>
+        <a href="/movies?order_by=startYear&order=desc">Films récents</a>
+        </button>
+        <button>
+        <a href="/movies?order_by=startYear&order=asc">Films anciens</a>
+        </button>
+        <button>
+        <a href="/movies?order_by=averageRating&order=desc">Meilleurs Films</a>
+        </button>
+        <button>
+        <a href="/movies?order_by=averageRating&order=asc">Films moins biens notés</a>
+        </button>     
+        </div>
 
         <div class="wrapper">
             @foreach ($movies as $movie)
             <div class="wrap">
                 <h1>{{ $movie->originalTitle }}</h1>
                 <div>
-                    <a href="/movies/{{ $movie->id }}">
+                    <a href="/movie/{{ $movie->id }}">
                         <img src="{{ $movie->poster }}" alt="{{ $movie->primaryTitle }}">
                     </a>
                 </div>

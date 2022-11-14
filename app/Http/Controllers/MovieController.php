@@ -73,6 +73,19 @@ class MovieController extends Controller
         return view('movies', ['movies' => $movies]);
     }
 
+        /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */ 
+    public function random()
+    {
+        $movie = Movie::inRandomOrder()->get()->first();
+
+        return view('movie', ['movie' => $movie]);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
