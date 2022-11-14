@@ -51,6 +51,19 @@ class MovieController extends Controller
         return view('movie', ['movie' => $movie]);
     }
 
+        /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */ 
+    public function list()
+    {
+        $movies = Movie::limit(20)->get();
+
+        return view('movies', ['movies' => $movies]);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
