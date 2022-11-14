@@ -47,6 +47,10 @@ p{
     max-height: 200px;
     text-overflow: clip;
 }
+
+.buttons{
+    margin: 0 auto;
+}
     </style>
 </head>
 <body>
@@ -70,6 +74,10 @@ p{
             <p>{{ $movie->plot }}</p>
             </div>
                 @endforeach
+                <div class="buttons">
+                {{ $movies->links() }}
+                </div>
+                
         </div>
     </div>
 </body>
