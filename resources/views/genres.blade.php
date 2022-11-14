@@ -23,13 +23,13 @@
             display: flex;
             column-gap: 1rem;
             flex-wrap: wrap;
+            max-width: 50px;
         }
 
         .wrap{
             display: flex;
             flex-direction: column;
             align-items: center;
-            max-width: 300px;
         }
 
         .space-between{
@@ -81,27 +81,11 @@ button{
         </div>
 
         <div class="wrapper">
-            @foreach ($movies as $movie)
+            @foreach ($genres as $genre)
             <div class="wrap">
-                <h1>{{ $movie->originalTitle }}</h1>
-                <div>
-                    <a href="/movie/{{ $movie->id }}">
-                        <img src="{{ $movie->poster }}" alt="{{ $movie->primaryTitle }}">
-                    </a>
-                </div>
-                <div class="space-between">
-                <h4>Année de sortie : {{ $movie->startYear }}</h4>
-                <h4>Note : {{ $movie->averageRating }}</h4>
-                <h4>Durée : {{ $movie->runtimeMinutes }}min</h4>
+                <h3>{{ $genre->label }}</h3>
             </div>
-            <h2>Résumé :</h2>
-            <p>{{ $movie->plot }}</p>
-            </div>
-                @endforeach
-                <div class="buttons">
-                {{ $movies->links() }}
-                </div>
-                
+                @endforeach                
         </div>
     </div>
 </body>
