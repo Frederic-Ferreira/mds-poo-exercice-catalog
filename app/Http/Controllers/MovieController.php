@@ -57,9 +57,18 @@ class MovieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */ 
-    public function list()
+    public function list(Request $request)
     {
-        $movies = Movie::simplePaginate(20);
+        $orderBy = $request->query('order_by');
+        $order = $request->query('order');
+        
+        
+        $query = Movie::query();
+        if (request('order_by') && request('order')) {
+            $query= $query->orderBy($orderBy, $order);
+        }
+
+        $movies = $query->simplePaginate(20);
 
         return view('movies', ['movies' => $movies]);
     }

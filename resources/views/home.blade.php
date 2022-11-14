@@ -27,6 +27,8 @@
     <div class="container">
         <h1>{{ config('app.name') }}</h1>
 
+        <div><a href="/movies?order_by=startYear&order=desc">dernières sorties</a></div>
+
         <div class="wrapper">
             @foreach ($movies as $movie)
             <div>

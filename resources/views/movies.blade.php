@@ -68,6 +68,7 @@ p{
                 </div>
                 <div class="space-between">
                 <h4>Année de sortie : {{ $movie->startYear }}</h4>
+                <h4>Note : {{ $movie->averageRating }}</h4>
                 <h4>Durée : {{ $movie->runtimeMinutes }}min</h4>
             </div>
             <h2>Résumé :</h2>
