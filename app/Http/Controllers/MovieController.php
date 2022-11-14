@@ -59,20 +59,7 @@ class MovieController extends Controller
      */ 
     public function list()
     {
-        $movies = Movie::limit(20)->get();
-
-        return view('movies', ['movies' => $movies]);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */ 
-    public function page()
-    {
-        $movies = Movie::orderBy('originalTitle')->simplePaginate(20);
+        $movies = Movie::simplePaginate(20);
 
         return view('movies', ['movies' => $movies]);
     }
