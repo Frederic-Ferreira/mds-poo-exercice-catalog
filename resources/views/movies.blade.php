@@ -23,6 +23,7 @@
             display: flex;
             column-gap: 1rem;
             flex-wrap: wrap;
+            justify-content: center;
         }
 
         .wrap{
@@ -49,6 +50,8 @@ p{
 }
 
 .buttons{
+    margin-top: 1rem;
+    display: inline;
     margin: 0 auto;
 }
 
@@ -62,6 +65,9 @@ button{
         <h1>{{ config('app.name') }}</h1>
         <button>
         <a href="/">Accueil</a>
+        </button>
+        <button>
+        <a href="/genres">Genres de film</a>
         </button>
         <button>
         <a href="/movie/random">Trouver un film au hasard</a>
@@ -98,11 +104,11 @@ button{
             <p>{{ $movie->plot }}</p>
             </div>
                 @endforeach
-                <div class="buttons">
+            </div>
+            <div class="buttons">
                 {{ $movies->links() }}
-                </div>
-                
-        </div>
+            </div>
+            
     </div>
 </body>
 </html>

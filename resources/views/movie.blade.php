@@ -38,6 +38,27 @@
 <body>
     <div class="container">
         <h1>{{ config('app.name') }}</h1>
+        <button>
+        <a href="/">Accueil</a>
+        </button>
+        <button>
+        <a href="/genres">Genres de film</a>
+        </button>
+        <button>
+        <a href="/movie/random">Trouver un film au hasard</a>
+        </button>
+        <button>
+        <a href="/movies?order_by=startYear&order=desc">Films récents</a>
+        </button>
+        <button>
+        <a href="/movies?order_by=startYear&order=asc">Films anciens</a>
+        </button>
+        <button>
+        <a href="/movies?order_by=averageRating&order=desc">Meilleurs Films</a>
+        </button>
+        <button>
+        <a href="/movies?order_by=averageRating&order=asc">Films moins biens notés</a>
+        </button>     
 
         <div class="wrapper">
             <h1>{{ $movie->originalTitle }}</h1>

@@ -64,6 +64,9 @@ button{
         <a href="/">Accueil</a>
         </button>
         <button>
+        <a href="/genres">Genres de film</a>
+        </button>
+        <button>
         <a href="/movie/random">Trouver un film au hasard</a>
         </button>
         <div><button>
@@ -79,11 +82,11 @@ button{
         <a href="/movies?order_by=averageRating&order=asc">Films moins biens notés</a>
         </button>     
         </div>
-
+ 
         <div class="wrapper">
             @foreach ($genres as $genre)
             <div class="wrap">
-                <h3>{{ $genre->label }}</h3>
+                <a href="/movies?genre={{ $genre->label }}"><h3>{{ $genre->label }}</h3></a>
             </div>
                 @endforeach                
         </div>

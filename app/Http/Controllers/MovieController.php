@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Movie;
+use App\Models\Genre;
+use Illuminate\Database\Eloquent\Builder;
 
 class MovieController extends Controller
 {
@@ -61,14 +63,20 @@ class MovieController extends Controller
     {
         $orderBy = $request->query('order_by');
         $order = $request->query('order');
-        
+        $genre = $request->query('genre');
         
         $query = Movie::query();
         if (request('order_by') && request('order')) {
-            $query= $query->orderBy($orderBy, $order);
+            $movies = $query->orderBy($orderBy, $order)->simplePaginate(20);
         }
 
-        $movies = $query->simplePaginate(20);
+        if (request('genre')) {
+            $genre = Genre::where('label', $genre)->first();
+            $genre_id = $genre->id;
+            $movies = Movie::whereHas('genres', function (Builder $movieQuery) use ($genre_id) {
+                $movieQuery->where('genre_id', $genre_id);
+            })->simplePaginate(20);
+        }
 
         return view('movies', ['movies' => $movies]);
     }
