@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Series;
 
 class SeriesController extends Controller
 {
@@ -42,10 +43,49 @@ class SeriesController extends Controller
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
-     */
+     */ 
     public function show($id)
     {
-        //
+        $serie = Series::where('id', $id)->first();
+
+        return view('serie', ['serie' => $serie]);
+    }
+
+        /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function list(Request $request)
+    {
+        $orderBy = $request->query('order_by');
+        $order = $request->query('order');
+        
+        $query = Series::query();
+        if (request('order_by') && request('order')) {
+            $series = $query->orderBy($orderBy, $order);
+        } 
+        
+        if(request('genre') || request('order_by')) {
+            $series = $series->simplePaginate(20); 
+        } else {
+            $series = $query->simplePaginate(20);
+        }
+        return view('series', ['series' => $series]);
+    }
+
+            /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */ 
+    public function random()
+    {
+        $serie = Series::inRandomOrder()->get()->first();
+
+        return view('serie', ['serie' => $serie]);
     }
 
     /**
