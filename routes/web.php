@@ -3,6 +3,7 @@
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\SeriesController;
+use App\Http\Controllers\SearchController;
 use App\Models\Movie;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +19,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [MovieController::class, 'random']);
+
+Route::get('/search', [SearchController::class, 'search']);
 
 Route::get('/movie/random', [MovieController::class, 'random']);
 

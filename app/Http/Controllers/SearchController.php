@@ -1,13 +1,15 @@
 <?php
-
+ 
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Series;
+use App\Models\Episode;
 use App\Models\Movie;
 use App\Models\Genre;
 use Illuminate\Database\Eloquent\Builder;
 
-class MovieController extends Controller
+class SearchController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -45,12 +47,10 @@ class MovieController extends Controller
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
-     */ 
+     */
     public function show($id)
     {
-        $movie = Movie::where('id', $id)->first();
-
-        return view('movie', ['movie' => $movie]);
+        //
     }
 
         /**
@@ -58,46 +58,19 @@ class MovieController extends Controller
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
-     */ 
-    public function list(Request $request)
+     */
+    public function search(Request $request)
     {
-        $orderBy = $request->query('order_by');
-        $order = $request->query('order');
-        $genre = $request->query('genre');
-        
-        $query = Movie::query();
-        if (request('order_by') && request('order')) {
-            $movies = $query->orderBy($orderBy, $order);
-        }
+        $search = $request->input('q');
 
-        if (request('genre')) {
-            $genre = Genre::where('label', $genre)->first();
-            $genre_id = $genre->id;
-            $movies = Movie::whereHas('genres', function (Builder $movieQuery) use ($genre_id) {
-                $movieQuery->where('genre_id', $genre_id);
-            });
-        }
+        $movies = Movie::query()->where('originalTitle', 'LIKE', "%{$search}%")->get();
 
-        if(request('genre') || request('order_by')) {
-            $movies = $movies->simplePaginate(20); 
-        } else {
-            $movies = $query->simplePaginate(20);
-        }
+        $series = Series::query()->where('originalTitle', 'LIKE', "%{$search}%")->get();
 
-        return view('movies', ['movies' => $movies]);
-    }
+        $episodes = Episode::query()->where('originalTitle', 'LIKE', "%{$search}%")->get();
 
-        /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */ 
-    public function random()
-    {
-        $movie = Movie::inRandomOrder()->get()->first();
+        return view('search', ['movies' => $movies, 'series' => $series, 'episodes' => $episodes]);
 
-        return view('home', ['movie' => $movie]);
     }
 
     /**

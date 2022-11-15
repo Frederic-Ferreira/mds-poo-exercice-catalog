@@ -10,21 +10,34 @@
     <!-- Fonts -->
     <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
-    <!-- Styles -->
+    <link href="./../css/app.css" rel="stylesheet" />
     <style>
-        .container {
-            margin: auto;
-            max-width: 900px;
-        }
 
-        .wrapper {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-        }
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
-        .nav{
+.wrapper {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.space-between{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.nav{
     display: flex;
     gap: 10px;
+}
+
+form{
+    margin: 1rem 0;
 }
 
     </style>
@@ -33,6 +46,10 @@
 <body>
     <div class="container">
         <h1>{{ config('app.name') }}</h1>
+        <form method="GET" action="/search">
+            <label for="#">Rechercher un film, une série, ou un épisode : </label>
+            <input type="text" name="q" />
+        </form>
         <div class="nav">
         <button>
         <a href="/">Accueil</a>
@@ -73,16 +90,21 @@
         <button>
         <a href="/series?order_by=averageRating&order=asc">Série moins biens notés</a>
         </button>     
-        </div>
+        </div>  
 
         <div class="wrapper">
-            @foreach ($movies as $movie)
+            <h1>{{ $movie->originalTitle }}</h1>
             <div>
-                <a href="/movies/{{ $movie->id }}">
+                <a href="/movie/{{ $movie->id }}">
                     <img src="{{ $movie->poster }}" alt="{{ $movie->primaryTitle }}">
                 </a>
             </div>
-            @endforeach
+            <div class="space-between">
+                <h4>Année de sortie : {{ $movie->startYear }}</h4>
+                <h4>Durée : {{ $movie->runtimeMinutes }}min</h4>
+            </div>
+            <h2>Résumé :</h2>
+            <p>{{ $movie->plot }}</p>
         </div>
     </div>
 </body>

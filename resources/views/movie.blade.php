@@ -87,7 +87,7 @@
         <div class="wrapper">
             <h1>{{ $movie->originalTitle }}</h1>
             <div>
-                <a href="/movies/{{ $movie->id }}">
+                <a href="/movie/{{ $movie->id }}">
                     <img src="{{ $movie->poster }}" alt="{{ $movie->primaryTitle }}">
                 </a>
             </div>

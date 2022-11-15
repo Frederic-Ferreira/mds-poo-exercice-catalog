@@ -87,7 +87,7 @@
         <div class="wrapper">
             <h1>{{ $episode->originalTitle }}</h1>
             <div>
-                <a href="/series/{{ $episode->id }}">
+                <a href="/series/{{ $episode->series_id }}/season/{{ $episode->seasonNumber }}/episode/{{ $episode->episodeNumber }}">
                     <img src="{{ $episode->poster }}" alt="{{ $episode->primaryTitle }}">
                 </a>
             </div>
