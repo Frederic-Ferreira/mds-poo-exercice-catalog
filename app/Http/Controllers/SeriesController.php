@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Series;
+use App\Models\Episode;
+use Illuminate\Database\Eloquent\Builder;
 
 class SeriesController extends Controller
 {
@@ -48,7 +50,40 @@ class SeriesController extends Controller
     {
         $serie = Series::where('id', $id)->first();
 
-        return view('serie', ['serie' => $serie]);
+        $serieId = $serie->id;
+        $episodes = Episode::where('series_id', $serieId)->simplePaginate(20);
+
+        return view('serie', ['serie' => $serie, 'serieId' => $serieId, 'episodes' => $episodes]);
+    }
+
+        /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */ 
+    public function season($id, $season_num)
+    {
+        $serie = Series::where('id', $id)->first();
+        $serieId = $serie->id;
+        $episodes = Episode::where('series_id', $serieId)->where('seasonNumber', $season_num)->simplePaginate(20);
+
+        return view('episodes', ['episodes' => $episodes]);
+    }
+
+        /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */ 
+    public function episode($id, $season_num, $episode_num)
+    {
+        $serie = Series::where('id', $id)->first();
+        $serieId = $serie->id;
+        $episode = Episode::where('series_id', $serieId)->where('seasonNumber', $season_num)->where('episodeNumber', $episode_num)->first();
+
+        return view('episode', ['episode' => $episode]);
     }
 
         /**
@@ -85,7 +120,7 @@ class SeriesController extends Controller
     {
         $serie = Series::inRandomOrder()->get()->first();
 
-        return view('serie', ['serie' => $serie]);
+        return view('randomSerie', ['serie' => $serie]);
     }
 
     /**

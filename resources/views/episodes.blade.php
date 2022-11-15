@@ -58,19 +58,11 @@ p{
 button{
     margin: 2px;
 }
-
-.nav{
-    display: flex;
-    gap: 10px;
-}
-
     </style>
-
 </head>
 <body>
     <div class="container">
         <h1>{{ config('app.name') }}</h1>
-        <div class="nav">
         <button>
         <a href="/">Accueil</a>
         </button>
@@ -86,7 +78,7 @@ button{
         <button>
         <a href="/series">Liste des séries</a>
         </button>
-        <button>
+        <div><button>
         <a href="/movies?order_by=startYear&order=desc">Films récents</a>
         </button>
         <button>
@@ -97,7 +89,7 @@ button{
         </button>
         <button>
         <a href="/movies?order_by=averageRating&order=asc">Films moins biens notés</a>
-        </button>  
+        </button>
         <button>
         <a href="/series?order_by=startYear&order=desc">Série récentes</a>
         </button>
@@ -109,30 +101,30 @@ button{
         </button>
         <button>
         <a href="/series?order_by=averageRating&order=asc">Série moins biens notés</a>
-        </button>     
+        </button>       
         </div>
 
         <div class="wrapper">
-            @foreach ($movies as $movie)
+            @foreach ($episodes as $episode)
             <div class="wrap">
-                <h1>{{ $movie->originalTitle }}</h1>
+                <h1>{{ $episode->originalTitle }}</h1>
                 <div>
-                    <a href="/movie/{{ $movie->id }}">
-                        <img src="{{ $movie->poster }}" alt="{{ $movie->primaryTitle }}">
+                    <a href="/series/{{ $episode->id }}">
+                        <img src="{{ $episode->poster }}" alt="{{ $episode->primaryTitle }}">
                     </a>
                 </div>
                 <div class="space-between">
-                <h4>Année de sortie : {{ $movie->startYear }}</h4>
-                <h4>Note : {{ $movie->averageRating }}</h4>
-                <h4>Durée : {{ $movie->runtimeMinutes }}min</h4>
+                <h4>Année de sortie : {{ $episode->startYear }}</h4>
+                <h4>Note : {{ $episode->averageRating }}</h4>
+                <h4>Durée : {{ $episode->runtimeMinutes }}min</h4>
             </div>
             <h2>Résumé :</h2>
-            <p>{{ $movie->plot }}</p>
+            <p>{{ $episode->plot }}</p>
             </div>
                 @endforeach
             </div>
             <div class="buttons">
-                {{ $movies->links() }}
+                {{ $episodes->links() }}
             </div>
             
     </div>

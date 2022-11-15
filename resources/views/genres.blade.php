@@ -55,11 +55,19 @@ p{
 button{
     margin: 2px;
 }
+
+.nav{
+    display: flex;
+    gap: 10px;
+}
+
     </style>
+
 </head>
 <body>
     <div class="container">
         <h1>{{ config('app.name') }}</h1>
+        <div class="nav">
         <button>
         <a href="/">Accueil</a>
         </button>
@@ -75,7 +83,7 @@ button{
         <button>
         <a href="/series">Liste des séries</a>
         </button>
-        <div><button>
+        <button>
         <a href="/movies?order_by=startYear&order=desc">Films récents</a>
         </button>
         <button>
@@ -86,6 +94,18 @@ button{
         </button>
         <button>
         <a href="/movies?order_by=averageRating&order=asc">Films moins biens notés</a>
+        </button>  
+        <button>
+        <a href="/series?order_by=startYear&order=desc">Série récentes</a>
+        </button>
+        <button>
+        <a href="/series?order_by=startYear&order=asc">Série anciennes</a>
+        </button>
+        <button>
+        <a href="/series?order_by=averageRating&order=desc">Meilleures Série</a>
+        </button>
+        <button>
+        <a href="/series?order_by=averageRating&order=asc">Série moins biens notés</a>
         </button>     
         </div>
  

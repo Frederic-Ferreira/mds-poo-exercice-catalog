@@ -10,55 +10,27 @@
     <!-- Fonts -->
     <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
-    <!-- Styles -->
+    <link href="./../css/app.css" rel="stylesheet" />
     <style>
-        .container{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-        }
 
-        .wrapper{
-            display: flex;
-            column-gap: 1rem;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
-        .wrap{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            max-width: 300px;
-        }
+.wrapper {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
-        .space-between{
+.space-between{
     width: 100%;
     display: flex;
     justify-content: space-between;
 }
-
-p{
-    overflow: hidden;
-    position: relative;
-    text-overflow: ellipsis;
-    display:inline-block;
-    max-width: 300px;
-    max-height: 200px;
-    text-overflow: clip;
-}
-
-.buttons{
-    margin-top: 1rem;
-    display: inline;
-    margin: 0 auto;
-}
-
-button{
-    margin: 2px;
-}
-
 .nav{
     display: flex;
     gap: 10px;
@@ -113,28 +85,19 @@ button{
         </div>
 
         <div class="wrapper">
-            @foreach ($movies as $movie)
-            <div class="wrap">
-                <h1>{{ $movie->originalTitle }}</h1>
-                <div>
-                    <a href="/movie/{{ $movie->id }}">
-                        <img src="{{ $movie->poster }}" alt="{{ $movie->primaryTitle }}">
-                    </a>
-                </div>
-                <div class="space-between">
-                <h4>Année de sortie : {{ $movie->startYear }}</h4>
-                <h4>Note : {{ $movie->averageRating }}</h4>
-                <h4>Durée : {{ $movie->runtimeMinutes }}min</h4>
+            <h1>{{ $episode->originalTitle }}</h1>
+            <div>
+                <a href="/series/{{ $episode->id }}">
+                    <img src="{{ $episode->poster }}" alt="{{ $episode->primaryTitle }}">
+                </a>
+            </div>
+            <div class="space-between">
+                <h4>Année de sortie : {{ $episode->startYear }}</h4>
+                <h4>Durée : {{ $episode->runtimeMinutes }}min</h4>
             </div>
             <h2>Résumé :</h2>
-            <p>{{ $movie->plot }}</p>
-            </div>
-                @endforeach
-            </div>
-            <div class="buttons">
-                {{ $movies->links() }}
-            </div>
-            
+            <p>{{ $episode->plot }}</p>
+        </div>
     </div>
 </body>
 </html>

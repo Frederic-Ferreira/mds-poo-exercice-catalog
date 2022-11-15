@@ -31,6 +31,10 @@
     display: flex;
     justify-content: space-between;
 }
+.nav{
+    display: flex;
+    gap: 10px;
+}
 
     </style>
 
@@ -38,6 +42,7 @@
 <body>
     <div class="container">
         <h1>{{ config('app.name') }}</h1>
+        <div class="nav">
         <button>
         <a href="/">Accueil</a>
         </button>
@@ -64,7 +69,20 @@
         </button>
         <button>
         <a href="/movies?order_by=averageRating&order=asc">Films moins biens notés</a>
+        </button>  
+        <button>
+        <a href="/series?order_by=startYear&order=desc">Série récentes</a>
+        </button>
+        <button>
+        <a href="/series?order_by=startYear&order=asc">Série anciennes</a>
+        </button>
+        <button>
+        <a href="/series?order_by=averageRating&order=desc">Meilleures Série</a>
+        </button>
+        <button>
+        <a href="/series?order_by=averageRating&order=asc">Série moins biens notés</a>
         </button>     
+        </div>  
 
         <div class="wrapper">
             <h1>{{ $movie->originalTitle }}</h1>

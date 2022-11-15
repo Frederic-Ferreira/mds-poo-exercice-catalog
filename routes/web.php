@@ -31,5 +31,9 @@ Route::get('/series/random', [SeriesController::class, 'random']);
 
 Route::get('/series/{id}', [SeriesController::class, 'show']);
 
+Route::get('/series/{id}/season/{season_num}', [SeriesController::class, 'season']);
+
+Route::get('/series/{id}/season/{season_num}/episode/{episode_num}', [SeriesController::class, 'episode']);
+
 Route::get('/series', [SeriesController::class, 'list']);
 
