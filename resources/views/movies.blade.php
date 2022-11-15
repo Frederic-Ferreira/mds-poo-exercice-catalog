@@ -72,7 +72,13 @@ button{
         <button>
         <a href="/movie/random">Trouver un film au hasard</a>
         </button>
-        <div><button>
+        <button>
+        <a href="/series/random">Trouver une série au hasard</a>
+        </button>
+        <button>
+        <a href="/series">Liste des séries</a>
+        </button>
+        <button>
         <a href="/movies?order_by=startYear&order=desc">Films récents</a>
         </button>
         <button>
