@@ -5,16 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Episode extends Model
-{
-    use HasFactory;
+class Episode extends Title
+{ 
+    use HasFactory; 
 
-        /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
-    protected $table = 'episodes';
+
+    public $type = 'tvEpisode';
 
     /**
      * Indicates if the model should be timestamped.
@@ -22,5 +18,15 @@ class Episode extends Model
      * @var bool
      */
     public $timestamps = false;
+
+        public function genres()
+    {
+        return $this->belongsToMany(Genre::class, 'titles_genres', 'title_id', 'genre_id');
+    }
+
+    public function series()
+    {
+        return $this->belongsToMany(Series::class, 'titles_episodes', 'episode_id', 'title_id')->withPivot('seasonNumber', 'episodeNumber');
+    }
 }
 

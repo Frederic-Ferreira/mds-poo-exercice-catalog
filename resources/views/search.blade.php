@@ -113,60 +113,22 @@ button{
         </div>
 
         <div class="wrapper">
-        @isset($movies)
-        @foreach ($movies as $movie)
+        @isset($titles)
+        @foreach ($titles as $title)
             <div class="wrap">
-                <h1>{{ $movie->originalTitle }}</h1>
+                <h1>{{ $title->originalTitle }}</h1>
                 <div>
-                    <a href="/movie/{{ $movie->id }}">
-                        <img src="{{ $movie->poster }}" alt="{{ $movie->primaryTitle }}">
+                    <a href="/movie/{{ $title->id }}">
+                        <img src="{{ $title->poster }}" alt="{{ $title->primaryTitle }}">
                     </a>
                 </div>
                 <div class="space-between">
-                <h4>Année de sortie : {{ $movie->startYear }}</h4>
-                <h4>Note : {{ $movie->averageRating }}</h4>
-                <h4>Durée : {{ $movie->runtimeMinutes }}min</h4>
+                <h4>Année de sortie : {{ $title->startYear }}</h4>
+                <h4>Note : {{ $title->averageRating }}</h4>
+                <h4>Durée : {{ $title->runtimeMinutes }}min</h4>
             </div>
             <h2>Résumé :</h2>
-            <p>{{ $movie->plot }}</p>
-            </div>
-                @endforeach
-        @endisset
-        @isset($series)
-        @foreach ($series as $serie)
-            <div class="wrap">
-                <h1>{{ $serie->originalTitle }}</h1>
-                <div>
-                    <a href="/series/{{ $serie->id }}">
-                        <img src="{{ $serie->poster }}" alt="{{ $serie->primaryTitle }}">
-                    </a>
-                </div>
-                <div class="space-between">
-                <h4>Année de sortie : {{ $serie->startYear }}</h4>
-                <h4>Note : {{ $serie->averageRating }}</h4>
-                <h4>Durée : {{ $serie->runtimeMinutes }}min</h4>
-            </div>
-            <h2>Résumé :</h2>
-            <p>{{ $serie->plot }}</p>
-            </div>
-                @endforeach
-        @endisset
-        @isset($episodes)
-        @foreach ($episodes as $episode)
-            <div class="wrap">
-                <h1>{{ $episode->originalTitle }}</h1>
-                <div>
-                    <a href="/series/{{ $episode->series_id }}/season/{{ $episode->seasonNumber }}/episode/{{ $episode->episodeNumber }}">
-                        <img src="{{ $episode->poster }}" alt="{{ $episode->primaryTitle }}">
-                    </a>
-                </div>
-                <div class="space-between">
-                <h4>Année de sortie : {{ $episode->startYear }}</h4>
-                <h4>Note : {{ $episode->averageRating }}</h4>
-                <h4>Durée : {{ $episode->runtimeMinutes }}min</h4>
-            </div>
-            <h2>Résumé :</h2>
-            <p>{{ $episode->plot }}</p>
+            <p>{{ $title->plot }}</p>
             </div>
                 @endforeach
         @endisset

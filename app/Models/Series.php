@@ -1,20 +1,13 @@
 <?php
 
-namespace App\Models;
+namespace App\Models; 
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
-class Series extends Model
+class Series extends Title
 {
     use HasFactory;
 
-        /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
-    protected $table = 'series';
 
     /**
      * Indicates if the model should be timestamped.
@@ -23,9 +16,11 @@ class Series extends Model
      */
     public $timestamps = false;
 
+    public $type = ['tvSeries', 'tvMiniSeries'];
+
     public function episodes()
     {
-        return $this->hasMany(Episode::class, 'series_id');
+        return $this->belongsToMany(Episode::class, 'titles_episodes', 'title_id', 'episode_id')->withPivot('seasonNumber', 'episodeNumber');
     }
 }
 

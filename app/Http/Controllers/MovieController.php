@@ -64,7 +64,7 @@ class MovieController extends Controller
         $orderBy = $request->query('order_by');
         $order = $request->query('order');
         $genre = $request->query('genre');
-        
+         
         $query = Movie::query();
         if (request('order_by') && request('order')) {
             $movies = $query->orderBy($orderBy, $order);
@@ -95,7 +95,7 @@ class MovieController extends Controller
      */ 
     public function random()
     {
-        $movie = Movie::inRandomOrder()->get()->first();
+        $movie = Movie::where('titleType', 'movie')->inRandomOrder()->get()->first();
 
         return view('home', ['movie' => $movie]);
     }

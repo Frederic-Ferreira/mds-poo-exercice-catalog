@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Series;
 use App\Models\Episode;
+use App\Models\Title;
 use Illuminate\Database\Eloquent\Builder;
 
 class SeriesController extends Controller
@@ -49,11 +50,13 @@ class SeriesController extends Controller
     public function show($id)
     {
         $serie = Series::where('id', $id)->first();
-
         $serieId = $serie->id;
-        $episodes = Episode::where('series_id', $serieId)->simplePaginate(20);
+        $episodes = $serie->episodes;
 
-        return view('serie', ['serie' => $serie, 'serieId' => $serieId, 'episodes' => $episodes]);
+        // $episodes = Episode::where('series_id', $serieId)->simplePaginate(20);
+        // 'serieId' => $serieId
+
+        return view('serie', ['serie' => $serie, 'episodes' => $episodes, 'serieId' => $serieId]);
     }
 
         /**
@@ -66,9 +69,9 @@ class SeriesController extends Controller
     {
         $serie = Series::where('id', $id)->first();
         $serieId = $serie->id;
-        $episodes = Episode::where('series_id', $serieId)->where('seasonNumber', $season_num)->simplePaginate(20);
+        $episodes = $serie->episodes()->wherePivot('seasonNumber', $season_num)->simplePaginate(20);
 
-        return view('episodes', ['episodes' => $episodes]);
+        return view('episodes', ['episodes' => $episodes, 'serieId' => $serieId]);
     }
 
         /**
@@ -81,9 +84,9 @@ class SeriesController extends Controller
     {
         $serie = Series::where('id', $id)->first();
         $serieId = $serie->id;
-        $episode = Episode::where('series_id', $serieId)->where('seasonNumber', $season_num)->where('episodeNumber', $episode_num)->first();
+        $episode = $serie->episodes()->wherePivot('seasonNumber', $season_num)->wherePivot('episodeNumber', $episode_num)->first();
 
-        return view('episode', ['episode' => $episode]);
+        return view('episode', ['episode' => $episode, 'serieId' => $serieId]);
     }
 
         /**

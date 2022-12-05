@@ -2,19 +2,12 @@
 
 namespace App\Models;
 
+use App\Models\Scopes\GlobalScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
-class Movie extends Model
+class Movie extends Title
 {
     use HasFactory;
-
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
-    protected $table = 'movies';
 
     /**
      * Indicates if the model should be timestamped.
@@ -23,11 +16,18 @@ class Movie extends Model
      */
     public $timestamps = false;
 
+        /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var string
+     */
+    public $type = 'movie';
+
     /**
      * The roles that belong to the user.
      */
     public function genres()
     {
-        return $this->belongsToMany(Genre::class, 'movies_genres');
+        return $this->belongsToMany(Genre::class, 'titles_genres', 'title_id', 'genre_id');
     }
 }

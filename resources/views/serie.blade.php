@@ -106,11 +106,12 @@
             <h2>Résumé :</h2>
             <p>{{ $serie->plot }}</p>
             <div class="wrap">
+            @isset($episodes)
             @foreach ($episodes as $episode)
             <div class="episode">
                 <h1>{{ $episode->originalTitle }}</h1>
                 <div>
-                    <a href="/series/{{ $serieId }}/season/{{ $episode->seasonNumber }}/episode/{{ $episode->episodeNumber }}">
+                    <a href="/series/{{ $serieId }}/season/{{ $episode->pivot->seasonNumber }}/episode/{{ $episode->pivot->episodeNumber }}">
                         <img src="{{ $episode->poster }}" alt="{{ $episode->primaryTitle }}">
                     </a>
                 </div>
@@ -122,9 +123,7 @@
             @endforeach
         </div>
             </div>
-            <div class="buttons">
-                {{ $episodes->links() }}
-            </div>
+            @endisset
         </div>
     </div>
 </body>

@@ -7,6 +7,7 @@ use App\Models\Series;
 use App\Models\Episode;
 use App\Models\Movie;
 use App\Models\Genre;
+use App\Models\Title;
 use Illuminate\Database\Eloquent\Builder;
 
 class SearchController extends Controller
@@ -63,14 +64,9 @@ class SearchController extends Controller
     {
         $search = $request->input('q');
 
-        $movies = Movie::query()->where('originalTitle', 'LIKE', "%{$search}%")->get();
+        $titles = Title::query()->where('originalTitle', 'LIKE', "%{$search}%")->get();
 
-        $series = Series::query()->where('originalTitle', 'LIKE', "%{$search}%")->get();
-
-        $episodes = Episode::query()->where('originalTitle', 'LIKE', "%{$search}%")->get();
-
-        return view('search', ['movies' => $movies, 'series' => $series, 'episodes' => $episodes]);
-
+        return view('search', ['titles' => $titles]);
     }
 
     /**
